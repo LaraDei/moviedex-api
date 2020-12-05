@@ -23,7 +23,7 @@ app.use(function validateBearerToken(req, res, next) {
 })
 
 app.get( '/movie', function handleGetMovies(req, res){
-    const {genre, country, vote}= req.query
+    const {genre, country, avg_vote}= req.query
     let response = movieData
  
     if (genre) {
@@ -36,9 +36,9 @@ app.get( '/movie', function handleGetMovies(req, res){
           movie.country.toLowerCase().includes(country.toLowerCase())
         )
     }
-    if (vote) {
+    if (avg_vote) {
         response = response.filter(movie =>
-          movie.avg_vote >= Number(vote)
+          movie.avg_vote >= Number(avg_vote)
         )
     }
     res.json(response)
